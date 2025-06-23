@@ -1,0 +1,7 @@
+{
+  "cmake.useCMakePresets": "always",
+  "cmake.options.statusBarVisibility": "visible",
+  "cSpell.words": [
+    "GPIO"
+  ]
+}

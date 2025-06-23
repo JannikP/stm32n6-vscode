@@ -1,0 +1,90 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Application",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "type": "cortex-debug",
+      "executable": "Appli/build/stm32n6-vscode_Appli.elf",
+      "servertype": "stlink",
+      "device": "STM32N657xx", //MCU used
+      "interface": "swd",
+      "runToEntryPoint": "main",
+      "showDevDebugOutput": "none",
+      "svdPath": "STM32N657.svd",
+      "serverArgs": [
+        "-m",
+        "1"
+      ],
+      "overrideLaunchCommands": [
+        "set *0x56028A4C=0xFFFFFF",
+        "set *0x52023080=0",
+        "set *0x52023100=0",
+        "set *0x52023180=0",
+        "set *0x52023200=0",
+        "set *0x52023280=0",
+        "-target-download",
+        "monitor halt"
+      ]
+    },
+    {
+      "name": "Build & Debug Application",
+      "cwd": "${workspaceFolder}",
+      "type": "cortex-debug",
+      "executable": "${workspaceFolder}/Appli/build/vot-hello-n6_Appli.elf",
+      // Let CMake extension decide executable: "${command:cmake.launchTargetPath}"
+      // Or fixed file path: "${workspaceFolder}/path/to/filename.elf"
+      "request": "launch",
+      "servertype": "stlink",
+      "device": "STM32N657xx", //MCU used
+      "interface": "swd",
+      "serialNumber": "", //Set ST-Link ID if you use multiple at the same time
+      "runToEntryPoint": "main",
+      "svdFile": "${workspaceFolder}/STM32N657.svd",
+      "v1": false, //Change it depending on ST Link version
+      "serverpath": "${config:STM32VSCodeExtension.cubeCLT.path}/STLink-gdb-server/bin/ST-LINK_gdbserver",
+      "stm32cubeprogrammer": "${config:STM32VSCodeExtension.cubeCLT.path}/STM32CubeProgrammer/bin",
+      "stlinkPath": "${config:STM32VSCodeExtension.cubeCLT.path}/STLink-gdb-server/bin/ST-LINK_gdbserver",
+      "armToolchainPath": "${config:STM32VSCodeExtension.cubeCLT.path}/GNU-tools-for-STM32/bin",
+      "gdbPath": "${config:STM32VSCodeExtension.cubeCLT.path}/GNU-tools-for-STM32/bin/arm-none-eabi-gdb",
+      "serverArgs": [
+        "-m",
+        "0"
+      ],
+      "preLaunchTask": "Build project"
+      /* If you use external loader, add additional arguments */
+      //"serverArgs": ["--extload", "path/to/ext/loader.stldr"],
+    },
+    {
+      "name": "Attach to Microcontroller - ST-Link",
+      "cwd": "${workspaceFolder}",
+      "type": "cortex-debug",
+      "executable": "${command:cmake.launchTargetPath}",
+      // Let CMake extension decide executable: "${command:cmake.launchTargetPath}"
+      // Or fixed file path: "${workspaceFolder}/path/to/filename.elf"
+      "request": "attach",
+      "servertype": "stlink",
+      "device": "STM32N657xx", //MCU used
+      "interface": "swd",
+      "serialNumber": "", //Set ST-Link ID if you use multiple at the same time
+      "runToEntryPoint": "main",
+      "svdFile": "${workspaceFolder}/STM32N657.svd",
+      "v1": false, //Change it depending on ST Link version
+      "serverpath": "${config:STM32VSCodeExtension.cubeCLT.path}/STLink-gdb-server/bin/ST-LINK_gdbserver",
+      "stm32cubeprogrammer": "${config:STM32VSCodeExtension.cubeCLT.path}/STM32CubeProgrammer/bin",
+      "stlinkPath": "${config:STM32VSCodeExtension.cubeCLT.path}/STLink-gdb-server/bin/ST-LINK_gdbserver",
+      "armToolchainPath": "${config:STM32VSCodeExtension.cubeCLT.path}/GNU-tools-for-STM32/bin",
+      "gdbPath": "${config:STM32VSCodeExtension.cubeCLT.path}/GNU-tools-for-STM32/bin/arm-none-eabi-gdb",
+      "serverArgs": [
+        "-m",
+        "0"
+      ],
+      /* If you use external loader, add additional arguments */
+      //"serverArgs": ["--extload", "path/to/ext/loader.stldr"],
+    }
+  ]
+}
